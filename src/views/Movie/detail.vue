@@ -184,7 +184,7 @@
               </div>
               <div class="conIn">
                 <div class="replay">{{ item.reply }} 回复</div>
-                <div class="publishTime">{{ item.time }}小时前</div>
+                <div class="publishTime">{{ item.time }}</div>
                 <div class="like">4</div>
               </div>
             </li>
@@ -221,6 +221,33 @@ export default {
   },
   props: ['movieId'],
   methods: {
+    // 计算时间工具
+    timeDiffe(time) {
+      var difTime = null
+      var date1 = time //开始时间
+      var date2 = new Date() //结束时间
+      var date3 = date2.getTime() - new Date(date1).getTime() //时间差的毫秒数
+      var days = Math.floor(date3 / (24 * 3600 * 1000))
+      //计算出小时数
+      var leave1 = date3 % (24 * 3600 * 1000) //计算天数后剩余的毫秒数
+      var hours = Math.floor(leave1 / (3600 * 1000))
+      //计算相差分钟数
+      var leave2 = leave1 % (3600 * 1000) //计算小时数后剩余的毫秒数
+      var minutes = Math.floor(leave2 / (60 * 1000))
+      //计算相差秒数
+      var leave3 = leave2 % (60 * 1000) //计算分钟数后剩余的毫秒数
+      var seconds = Math.round(leave3 / 1000)
+      if (days >= 1) {
+        difTime = days + ' 天前'
+      } else if (hours >= 1) {
+        difTime = hours + ' 小时前'
+      } else if (minutes >= 1) {
+        difTime = minutes + ' 分钟前'
+      }
+      // console.log(" 相差 "+days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
+      // alert(difTime)
+      return difTime
+    },
     handleToBack() {
       this.$router.back()
     },
@@ -355,6 +382,14 @@ export default {
       .then((res) => {
         console.log(res.data)
         this.movieCon = res.data.cmts
+        this.movieCon.forEach((item) => {
+          // 时间戳转换
+          if (item.time) {
+            // console.log(item.time)
+            item.time = this.timeDiffe(item.time)
+            // console.log(item.time)
+          }
+        })
         console.log('评论')
         console.log(this.movieCon)
         // }
@@ -757,12 +792,12 @@ body {
   background: white;
   border-radius: 2em 2em 0 0;
   top: 0;
-  height: 4em;
+  height: 3em;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px rgba(189, 189, 189, 1) solid;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
 }
 .comments > .commentsInfo {
   display: flex;
@@ -794,7 +829,8 @@ body {
 }
 .userInfo > .headImg > img {
   /* margin: 0 1em; */
-  height: 4em;
+  height: 3em;
+  width: 3em;
   border-radius: 50%;
 }
 .userInfo > .nickName {
@@ -802,6 +838,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 1em;
 }
 .userInfo > .share {
   /* border: 1px red solid; */
