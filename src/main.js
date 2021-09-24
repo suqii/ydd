@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './routers'
 import store from './stores'
 
-
+import '@/assets/icon/iconfont.css'
 import axios from 'axios'
 Vue.prototype.axios = axios;
 

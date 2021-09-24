@@ -185,7 +185,7 @@
               <div class="conIn">
                 <div class="replay">{{ item.reply }} 回复</div>
                 <div class="publishTime">{{ item.time }}</div>
-                <div class="like">4</div>
+                <div class="like iconfont icon-dianzan" >{{item.approve}}</div>
               </div>
             </li>
           </ul>
@@ -891,7 +891,7 @@ body {
 }
 .conIn > .like {
   height: 2em;
-  width: 5em;
+  width: 4em;
   display: flex;
   color: rgb(189, 189, 189);
   justify-content: center;

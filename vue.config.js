@@ -10,8 +10,8 @@ module.exports = {
                 pathRewrite: {'^/api2': ''}
             },
             '/api' : {
-              // target : 'http://47.108.192.147:3000',
-              target : 'http://localhost:3000',
+              target : 'http://47.108.192.147:3000',
+              // target : 'http://localhost:3000',
                 changeOrigin : true,
                 pathRewrite: {'^/api': ''}
             }
