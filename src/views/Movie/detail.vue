@@ -140,16 +140,16 @@
       </div>
       <div class="comments">
         <div class="title">
-            影评
+          影评
         </div>
         <div class="emo_line_01"></div>
         <div class="commentsInfo">
-            <!-- <ul 
-            v-for="(item, index) in movieCon"
-            :key="index"
-            > -->
-            <ul>
-                <li>
+          <ul>
+            <!-- <li  v-for="(item, index) in movieCon"
+            :key="index">
+              {{item}}
+            </li> -->
+            <!-- <li>
                     <div class="userInfo">
                         <div class="headImg">
                             <img src="https://img.meituan.net/avatar/f47f0c51d93e46515813b7fd6a21f67511344.jpg" alt="">
@@ -166,58 +166,31 @@
                       </div>
                       <div class="publishTime">
                         5小时前
-                      </div>
-                      <div class="like">4</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="userInfo">
-                        <div class="headImg">
-                            <img src="https://img.meituan.net/avatar/f47f0c51d93e46515813b7fd6a21f67511344.jpg" alt="">
-                        </div>
-                        <div class="nickName">岛川梦奈子</div>
-                        <div class="share">分享</div>
-                    </div>
-                    <div class="userCon">
-                        <pre>一部脑洞大开的作品，刚开始剧情略显平淡，很快就进入了精彩的追逐戏，接下来开始反转，到最后，又出现反转，关键是彩蛋环节，留下了各种猜想。\n特效方面，不得不说在巨幕厅看，确实很过瘾！\n建议电影可以做成电脑游戏，手机游戏，应该能吸引不少玩家！\n\n\n🌟 推荐\n有些剧情节奏快，可以二刷一下！\n\n\n🌅 画面\n特效不错！\n\n\n🎉闪光点\n反转比较多！\n\n🥚 彩蛋\n观影到最后！</pre>
-                        </div>
-                    <div class="conIn">
-                      <div class="replay">
-                        18 回复
-                      </div>
-                      <div class="publishTime">
-                        5小时前
-                      </div>
-                      <div class="like">4</div>
-                    </div>
-                </li>
-                <!-- <li>
-                    <div class="userInfo">
-                        <div class="headImg">
-                            <img src="https://img.meituan.net/avatar/f47f0c51d93e46515813b7fd6a21f67511344.jpg" alt="">
-                        </div>
-                        <div class="nickName">{{item.nickName}}</div>
-                        <div class="share">分享</div>
-                    </div>
-                    <div class="userCon">
-                        <pre>{{item.content}}</pre>
-                        </div>
-                    <div class="conIn">
-                      <div class="replay">
-                        {{item.reply}} 回复
-                      </div>
-                      <div class="publishTime">
-                        {{item.time}}小时前
                       </div>
                       <div class="like">4</div>
                     </div>
                 </li> -->
-                
-                
-                <!-- <li>a</li> -->
-            </ul>
+
+            <li v-for="(item, index) in movieCon" :key="index">
+              <div class="userInfo">
+                <div class="headImg">
+                  <img :src="item.avatarurl" />
+                </div>
+                <div class="nickName">{{ item.nickName }}</div>
+                <div class="share">分享</div>
+              </div>
+              <div class="userCon">
+                <pre>{{ item.content }}</pre>
+              </div>
+              <div class="conIn">
+                <div class="replay">{{ item.reply }} 回复</div>
+                <div class="publishTime">{{ item.time }}小时前</div>
+                <div class="like">4</div>
+              </div>
+            </li>
+          </ul>
         </div>
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -235,7 +208,7 @@ export default {
   data() {
     return {
       detailMovie: {},
-      movieCon: {},
+      movieCon: [],
       isLoading: true,
       moviePhNum: 0,
       wishNum: 0,
@@ -293,8 +266,8 @@ export default {
     },
 
     collectMovie() {
-      var email = localStorage.getItem('email');
-                    console.log(email);
+      var email = localStorage.getItem('email')
+      console.log(email)
       //  console.log(this.detailMovie.rt);
       // var email = '166218286@qq.com'
 
@@ -361,7 +334,7 @@ export default {
     this.axios
       .get('/api/api/detailmovie?movieId=' + this.movieId)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data)
         var msg = res.data.msg
         // if( msg === 'ok' ){
 
@@ -376,12 +349,14 @@ export default {
         })
         // }
       })
-
-       this.axios
-      .get('http://localhost:3000/api2/mmdb/comments/movie/248566.json?_v_=yes&offset=1')
+    // 评论
+    this.axios
+      .get('/api/api5/movie/' + this.movieId + '.json?_v_=yes&offset=1')
       .then((res) => {
         console.log(res.data)
-        this.movieCon = res.data.cmt;
+        this.movieCon = res.data.cmts
+        console.log('评论')
+        console.log(this.movieCon)
         // }
       })
   },
