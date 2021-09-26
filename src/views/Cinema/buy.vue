@@ -152,7 +152,7 @@ export default {
     console.log(this.CId)
      this.axios
       .get(
-        'http://47.108.192.147:3000/api2/mtrade/cinema/cinema/shows.json?cinemaId=1513&ci=1&userid=&channelId=4',
+        'http://47.108.192.147:3000/api2/mtrade/cinema/cinema/shows.json?cinemaId='+this.CId+'&ci=1&userid=&channelId=4',
         {}
       )
       .then((res) => {
