@@ -15,6 +15,10 @@ export default {
             component : () => import('@/views/Admin/cinema.vue')
         },
         {
+            path : 'search',
+            component : () => import('@/views/Admin/search.vue')
+        },
+        {
             path : '/admin',
             redirect : 'users'
         }

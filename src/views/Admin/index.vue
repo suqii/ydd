@@ -17,6 +17,10 @@
                         <i class="el-icon-setting"></i>
                         <router-link to="/admin/cinema" tag="span" slot="title">影院管理</router-link>
                     </el-menu-item>
+                    <el-menu-item index="4">
+                        <i class="el-icon-search"></i>
+                        <router-link to="/admin/search" tag="span" slot="title">影视搜索</router-link>
+                    </el-menu-item>
                 </el-menu>    
             </el-aside>
             <el-main>
