@@ -5,12 +5,12 @@ module.exports = {
       host: "0.0.0.0",
         proxy : {
             '/api2' : {
-                target : 'http://47.108.192.147:3000',
+                target : 'http://47.108.192.147:9000',
                 changeOrigin : true,
                 pathRewrite: {'^/api2': ''}
             },
             '/api' : {
-              target : 'http://47.108.192.147:3000',
+              target : 'http://47.108.192.147:9000',
               // target : 'http://localhost:3000',
                 changeOrigin : true,
                 pathRewrite: {'^/api': ''}
