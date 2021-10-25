@@ -65,7 +65,7 @@ export default {
     montheahcrt() {
      
       
-      var myechart = echarts.init(document.getElementById('monthorder'),this.them)
+      var myechart = echarts.init(document.getElementById('monthorder'))
       myechart.setOption({
         
         title: {

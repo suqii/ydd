@@ -1,9 +1,10 @@
 <template>
     <el-container>
-        <el-header>影多多管理后台 ，欢迎：{{ $store.state.user.name }}</el-header>
+      
+        <el-header style="display:flex;align-items: center;margin-left:-20px; "> <img style="height:50px;width:50px;" src="http://suqiqi.oss-cn-beijing.aliyuncs.com/freeFind/logo1.png" alt="" />影多多后台</el-header>
         <el-container>
             <el-aside width="200px">
-                <el-menu default-active="1">
+                <el-menu default-active="1" active-text-color="rgb(191, 203, 217)">
                     <el-menu-item index="1">
                         <i class="el-icon-menu"></i>
                         <router-link to="/admin/users" tag="span" slot="title">用户管理</router-link>
@@ -45,8 +46,8 @@ export default {
 
 <style scoped>
 .el-header, .el-footer {
-background-color: #B3C0D1;
-color: #333;
+background-color: rgb(48, 65, 86);
+color: white;
 padding-left:60px;
 line-height: 60px;
 
@@ -54,17 +55,22 @@ line-height: 60px;
 .el-container{
   /* border: 1px red solid; */
   height: 100%;
+  /* background: #000; */
 }
-
+.el-menu-item{
+  color: white;
+  background-color: rgb(48, 65, 86);
+}
 .el-aside {
-background-color: #D3DCE6;
+background-color: rgb(48, 65, 86);
 color: #333;
 text-align: center;
 line-height: 200px;
+
 }
 
 .el-main {
-background-color: #E9EEF3;
+/* background-color: rgb(48, 65, 86); */
 color: #333;
 text-align: center;
 }
@@ -81,4 +87,8 @@ line-height: 260px;
 .el-container:nth-child(7) .el-aside {
 line-height: 320px;
 }
+.el-menu-item.is-active {
+      background-color: rgb(38, 52, 69) !important;
+      /* color: #fff; */
+    }
 </style>
