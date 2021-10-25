@@ -24,6 +24,11 @@
         >
           {{item.showInfo}}
         </div>
+
+      </div>
+      <div class="button">
+          <el-button icon="el-icon-search" circle></el-button>
+          <el-button icon="el-icon-position" circle @click="toMaoyan(item.id)"></el-button>
       </div>
     </div>
   </div>
@@ -44,7 +49,12 @@ export default {
     })
   },
 
-  methods: {},
+  methods: {
+    toMaoyan(id){
+      console.log(id)
+      window.location.href = 'https://maoyan.com/films/'+id
+    }
+  },
 }
 </script>
 
@@ -60,7 +70,7 @@ export default {
   /* background: #000; */
   /* border:1px red solid  ; */
   margin: 30px;
-  height: 350px;
+  height: 400px;
   width: 250px;
   border-radius: 10px;
   box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
@@ -77,5 +87,10 @@ export default {
   align-items: center;
   /* background: red; */
   border-radius: 0 0 10px 10px;
+}
+.button{
+  width: 100%;
+  height: 50px;
+  /* background: #000; */
 }
 </style>
