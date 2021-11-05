@@ -14,7 +14,7 @@
               <div class="form-content">
                   <div class="form-line verify">
                       <!-- <label for="email">邮箱</label> -->
-                      <input v-model="email" class="input-data shadow" type="email" name="user-email" placeholder="账户名/手机号/Email">
+                      <input v-model="email" class="input-data shadow"  name="user-email" placeholder="账户名/手机号/Email">
                       <button class="embt" type='button' :disabled="disabled" @touchstart="handleToVerify">{{ verifyInfo }}</button>
                   </div>
                   <div class="form-line">
@@ -75,8 +75,32 @@ export default {
         handleToVerify(){
             
             if(this.disabled){ return; }
+           var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
-            this.axios.get('/api/users/verify?email=' + this.email ).then((res)=>{
+            if (!myreg.test(this.email)) {
+                this.axios.post('/api/users/send?phoneNum=' + this.email ).then((res)=>{
+                var status = res.data.code;
+                var This = this;
+                if( status === 200 ){
+                    messageBox({
+                        title : '验证码',
+                        content : '验证码已发送',
+                        ok : '确定',
+                        handleOk(){
+                            This.countDown();
+                        }
+                    });
+                }
+                else{
+                     messageBox({
+                        title : '验证码',
+                        content : '验证码发送失败',
+                        ok : '确定'
+                    });
+                }
+            });
+            }else{
+              this.axios.get('/api/users/verify?email=' + this.email ).then((res)=>{
                 var status = res.data.status;
                 var This = this;
                 if( status === 0 ){
@@ -97,6 +121,8 @@ export default {
                     });
                 }
             });
+            }
+            
         },
         handleToRegister(){
           // console.log(this.verify)
