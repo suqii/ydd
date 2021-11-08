@@ -1,10 +1,11 @@
 <template>
     <div id="main">
         <!-- <Header title="我的多多" /> -->
-        <div id="content">
+        <!-- <div id="content">
             <router-view />
-        </div>
-        <TabBar />
+        </div> -->
+        <router-view />
+        <!-- <TabBar /> -->
     </div>
 </template>
 

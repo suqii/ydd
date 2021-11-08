@@ -1,7 +1,17 @@
 <template>
     <el-container>
       
-        <el-header style="display:flex;align-items: center;margin-left:-20px; "> <img style="height:50px;width:50px;" src="http://suqiqi.oss-cn-beijing.aliyuncs.com/freeFind/logo1.png" alt="" />影多多后台</el-header>
+        <el-header style="display:flex;align-items: center;margin-left:-20px; "> 
+          <div style="display:flex;align-items: center;">
+            <img style="height:50px;width:50px;" src="https://suqiqi.oss-cn-beijing.aliyuncs.com/freeFind/logo.png" alt="" />
+          影多多后台
+          </div>
+          <!-- 退出登录 -->
+          <div style="display:flex;align-items: center;justify-content: center;">
+            <div style="margin-right:20px; font-size: 20px;">{{$store.state.user.name}}</div>
+            <el-button type="text" @click="logout">退出登录</el-button>
+          </div>
+          </el-header>
         <el-container>
             <el-aside width="200px">
                 <el-menu default-active="1" active-text-color="rgb(191, 203, 217)">
@@ -44,17 +54,30 @@ export default {
                 next('/mine/MLogin');
             }
         });
-    }
+    },
+    mounted(){
+      // console.log("a")
+      console.log(this.$store.state.user.userHead)
+      console.log(this.$store.state.user.name)
+    },
+     methods : {
+       logout(){
+         console.log('退出登录');
+         this.$router.replace('/mine/MLogin')
+        //  next('/mine/MLogin');
+       }
+     }
 }
 </script>
 
 <style scoped>
 .el-header, .el-footer {
 background-color: rgb(48, 65, 86);
+background-color: rgb(43, 47, 58);
 color: white;
 padding-left:60px;
 line-height: 60px;
-
+justify-content: space-between;
 }
 .el-container{
   /* border: 1px red solid; */

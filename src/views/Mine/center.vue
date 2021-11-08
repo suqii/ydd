@@ -134,14 +134,20 @@
         退出登录
       </div>
     </div>
+    <TabBar />
   </div>
+  
 </template>
 
 <script>
+import TabBar from '@/components/TabBar';
 import axios from 'axios'
 import { messageBox } from '@/components/JS'
 export default {
   name: 'center',
+  components : {
+        TabBar,
+    },
   methods: {
     handleToLogout() {
       this.axios.get('/api/users/logout').then((res) => {

@@ -1,6 +1,9 @@
 <template>
-  <div class="container">
-    <div class="card" v-for="(item, index) in movieList" :key="index">
+  <div class="container" element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
+    <div v-loading="loading"
+     class="card" v-for="(item, index) in movieList" :key="index">
       <!-- 背景 -->
       <div
         class="img"
@@ -40,12 +43,17 @@ export default {
   data() {
     return {
       movieList : [],
+      loading: true
     }
   },
   mounted() {
     this.axios.get('/api/api/comingList?ci=10&token=&limit=20').then((res) => {
-      console.log(res.data.coming)
-      this.movieList = res.data.coming
+      console.log(res.status)
+      if(res.status==200){
+        this.loading = false
+        this.movieList = res.data.coming
+      }
+      
     })
   },
 
